@@ -1,16 +1,17 @@
 # Python-Speech
 Speech Recognition and Text To Speech in Python
-------
+
+
 # Speech Recognition (Speech to Text):
 
-##Step 1:[Installing Python V.3](https://www.python.org/downloads/).
+## Step 1: [Installing Python V.3](https://www.python.org/downloads/).
 
-##Step 2: Installing SpeechRecognition:
+## Step 2: Installing SpeechRecognition:
 ```
 $ pip install SpeechRecognition
 ```
 
-##Step 3: Installing PyAudio (to access and use Microphone):
+## Step 3: Installing PyAudio (to access and use Microphone):
 [PyAudio Website](https://people.csail.mit.edu/hubert/pyaudio/)
 
 ### Windows:
@@ -37,6 +38,6 @@ pip install [DOWNLOADed FILE NAME]
 ```
 eg. :
 ```
-pip install PyAudio-0.2.11-cp37-cp37m-win_amd64.whl
+pip install PyAudio‑0.2.11‑cp38‑cp38m‑win32.whl
 ```
 
