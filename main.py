@@ -13,10 +13,14 @@ while True:
     with sr.Microphone() as source:
         # listen to Microphone
         audio = rec.listen(source)
-        # convert the Microphone input (audio variable) to text using Google Cloud Speech API 
-        text = rec.recognize_google(audio)
-        # print what you said
-        print("{}".format(text))
-        # check if you said "bye bye" in a few Data Model, break the loop and terminate the operation
-        if(format(text) == "bye-bye" or  format(text) == "bye bye"):
-            break
+        try: # if your voice recognited
+            # convert the Microphone input (audio variable) to text using Google Cloud Speech API 
+            text = rec.recognize_google(audio)
+            # print what you said
+            print("{}".format(text))
+            # check if you said "bye bye" in a few Data Model, break the loop and terminate the operation
+            if(format(text) == "bye-bye" or  format(text) == "bye bye"):
+                break
+        except:
+            # if your voice not recognited clearly
+            print("Sorry! could not recognize your voice")
