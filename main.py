@@ -1,40 +1,54 @@
-# imort speech recognition package
+# Imort speech recognition package
 import speech_recognition as sr
 
 class voiceAssistant:
+    # The "voiceText" variable used to store string of User voice (using Speech Recognition)
     voiceText=''
+
+    # Call "listener" function
     def __init__(self):
         voiceAssistant.listener(self)
 
-    # def speaker():
+    # TODO: def speaker():
+
+    # The function check "voiceText" and deside what Operation should be run
     def run_operation(self):
-        # check if you said "bye bye" in a few Data Model, break the loop and terminate the operation
+        # Check if you said "bye bye" in a few Data Model, return break
         if(self.voiceText == "bye-bye" or  self.voiceText == "bye bye"):
-            return break
+            return "break"
+
+    # "listener" function that listen to Microphone and use Speech Recognition to convert it to the text
     def listener(self):
-        # create recognizer instance
+        # Create recognizer instance
         rec = sr.Recognizer()
+
+        # Print "Say somthing:" in Terminal or CMD. You can speak when you see that text.
         print("Say something: ")
 
         # Infinite loop to listen
-        # press Ctrl+C or say 'bye bye' to break the loop and stop operating
+        # Press Ctrl+C or say 'bye bye' to break the loop and stop operating
         while True:
-            # use Microphone as audio source
+            # Use Microphone as audio source
             with sr.Microphone() as source:
-                # listen to Microphone
+                # Listen to Microphone
                 audio = rec.listen(source)
-                # try: # if your voice recognited
-                    # convert the Microphone input (audio variable) to text using Google Cloud Speech API 
-                text = rec.recognize_google(audio)
-                # print what you said
-                self.voiceText=format(text)
-                print(self.voiceText)
-                
-                returnValue = self.run_operation()
-                eval(returnValue)
-                # except:
-                #     # if your voice not recognited clearly
-                #     print("Sorry! could not recognize your voice")
 
+                try: # If your voice recognited without any error.
+
+                    # Convert the Microphone input (audio variable) to text using Google Cloud Speech API 
+                    text = rec.recognize_google(audio)
+                    # Print what you said
+                    self.voiceText=format(text)
+                    print(self.voiceText)
+                    
+                    # Call "run_operation" function that the function will be processed your voice
+                    # If you say "bye bye", the while loop will be broken and the the Voice Assistant stop working
+                    if self.run_operation() == "break" :
+                        break
+                except:
+                    # If your voice not recognited clearly
+                    print("Sorry! could not recognize your voice")
+
+
+# Create "voiceAssistant" instance
 assistant = voiceAssistant()
-# assistant
