@@ -1,17 +1,16 @@
 # Python-Speech
 Speech Recognition and Text To Speech (TTS) in Python
 
+##[Installing Python3](https://www.python.org/downloads/).
 
 ## Speech Recognition (Speech to Text):
 
-### Step 1: [Installing Python V.3](https://www.python.org/downloads/).
-
-### Step 2: Installing SpeechRecognition:
+### Step 1: Installing SpeechRecognition:
 ```
 $ pip install SpeechRecognition
 ```
 
-### Step 3: Installing PyAudio (to access and use Microphone):
+### Step 2: Installing PyAudio (to access and use Microphone):
 [PyAudio Website](https://people.csail.mit.edu/hubert/pyaudio/)
 
 ### Windows:
@@ -19,6 +18,7 @@ $ pip install SpeechRecognition
 $ pip install pyaudio
 ```
 ### Linux
+(Use pip3 instead of pip for python3)
 ```
 sudo apt-get install python-pyaudio python3-pyaudio
 ```
@@ -41,3 +41,16 @@ eg. :
 pip install PyAudio‑0.2.11‑cp38‑cp38m‑win32.whl
 ```
 
+
+-----
+
+## Text To Speech (TTS):
+
+## Step1: Installing Pyttsx3:
+[Pyttsx3 website](https://pyttsx3.readthedocs.io/en/latest/engine.html) - [Pyttsx3 Github](https://github.com/nateshmbhat/pyttsx3)
+
+```
+pip install pyttsx3
+```
+
+## Step 2: Let's Go ... 
