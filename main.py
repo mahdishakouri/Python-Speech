@@ -1,10 +1,9 @@
 # Imort speech recognition package
 import speech_recognition as sr
 import pyttsx3
+import os
 
 class voiceAssistant:
-    # The "voiceText" variable used to store string of User voice (using Speech Recognition)
-    voiceText=''
 
 
     # Call "listener" function
@@ -17,20 +16,20 @@ class voiceAssistant:
         # sapi5 - SAPI5 on Windows
         # nsss - NSSpeechSynthesizer on Mac OS X
         # espeak - eSpeak on every other platform
-        self.engine = pyttsx3.init()
+        self.pyttsxEngine = pyttsx3.init()
 
         # Setting up new voice rate
-        self.engine.setProperty('rate', 110)
+        self.pyttsxEngine.setProperty('rate', 130)
 
         # Setting up volume level  between 0 and 1
-        self.engine.setProperty('volume',0.9)
+        self.pyttsxEngine.setProperty('volume',0.9)
 
         # Getting details of current voice
-        voices = self.engine.getProperty('voices')
+        voices = self.pyttsxEngine.getProperty('voices')
 
         # Changing index, changes voices.
-        self.engine.setProperty('voice', voices[0].id)  # o for male
-        # self.engine.setProperty('voice', voices[1].id) # 1 for female
+        self.pyttsxEngine.setProperty('voice', voices[0].id)  # o for male
+        # self.pyttsxEngine.setProperty('voice', voices[1].id) # 1 for female
 
         # Say welcome
         self.speaker()
@@ -40,24 +39,55 @@ class voiceAssistant:
         
 
     def speaker(self,text=''):
+        # In first Time, text = '' and "Speaker" says the following sentence
         if text=='' :
             text="Hello, Welcome to the Voice Assistant"
+
+        # Print what is said
         print(text)
-        self.engine.say(text)
-        self.engine.runAndWait()
+        self.pyttsxEngine.say(text)
+        self.pyttsxEngine.runAndWait()
         
 
     # The function check "voiceText" and deside what Operation should be run
-    def run_operation(self):
+    def operation(self,text):
         # Check if you said "bye bye" in a few Data Model, return break
-        if(self.voiceText == "bye-bye" or  self.voiceText == "bye bye"):
+        if(text == "bye-bye" or  text == "bye bye"):
             self.speaker("Have nice day. Good bye!")
             return "break"
+        else:
+            # Split the text
+            splitedText=text.split()
+            # Delete first command
+            fn = splitedText[0]
+            # del splitedText[0]
+            # # Join list items and create string
+            # joinedText=' '.join(splitedText)
+
+            # Make Lowercase
+            fn=fn.lower()
+            if fn == 'open':
+                self.execute(splitedText[0])
+            if fn == 'close':
+                self.terminate(splitedText[0])
+            
+
+    def execute(self,program):
+        # It just working on Windows
+        self.speaker("Opening "+program)
+        # Open program using shell command
+        os.system('start '+program)
+
+    def terminate(self,program):
+        # It just working on Windows
+        self.speaker("Closing "+program)
+        # Close program using shell command
+        os.system('taskkill /IM '+program.lower()+'.exe /F')
 
     # "listener" function that listen to Microphone and use Speech Recognition to convert it to the text
     def listener(self):
         # Print "Say somthing:" in Terminal or CMD. You can speak when you see that text.
-        self.speaker("Say something:")
+        self.speaker("Say your command:")
 
         # Infinite loop to listen
         # Press Ctrl+C or say 'bye bye' to break the loop and stop operating
@@ -72,12 +102,12 @@ class voiceAssistant:
                     # Convert the Microphone input (audio variable) to text using Google Cloud Speech API 
                     text = self.rec.recognize_google(audio)
                     # Print what you said
-                    self.voiceText=format(text)
-                    print(self.voiceText)
+                    textFormatted=format(text)
+                    print(textFormatted)
                     
-                    # Call "run_operation" function that the function will be processed your voice
+                    # Call "operation" function that the function will be processed your voice
                     # If you say "bye bye", the while loop will be broken and the the Voice Assistant stop working
-                    if self.run_operation() == "break" :
+                    if self.operation(textFormatted) == "break" :
                         break
                 except:
                     # If your voice not recognited clearly
