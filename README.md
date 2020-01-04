@@ -1,4 +1,4 @@
-# Python-Speech
+# Voice-Assistant (Python Speech)
 Speech Recognition and Text To Speech (TTS) in Python
 
 ##[Installing Python3](https://www.python.org/downloads/).
